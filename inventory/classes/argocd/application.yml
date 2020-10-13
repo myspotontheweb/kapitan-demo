@@ -1,0 +1,15 @@
+classes:
+  - common
+
+parameters:
+  argocd:
+    namespace: argocd
+
+  kapitan:
+    compile:
+      - output_path: .
+        input_type: jsonnet
+        output_type: yaml
+        input_paths:
+          - components/argocd/application.jsonnet
+

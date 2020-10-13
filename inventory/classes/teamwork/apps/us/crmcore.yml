@@ -1,0 +1,7 @@
+classes:
+  - teamwork.apps.crmcore
+
+parameters:
+  application:
+    destination:
+      server: https://k8s-api.us.mydomain.com

@@ -1,0 +1,13 @@
+classes:
+  - argocd.application
+
+parameters:
+  application:
+    project: crm
+    destination:
+      namespace: crm
+      server: https://kubernetes.default.svc
+    source:
+      path: deployment/crmcore
+      repoURL: git@github.com:Teamwork/crmcore.git
+      targetRevision: master

@@ -1,0 +1,20 @@
+classes:
+  - teamwork.apps.us.crmcore
+
+parameters:
+  target_name: crmcore-us
+  application:
+    source:
+      helm:
+        values: |
+          crmcore:
+            service:
+              serviceType: LoadBalancer
+              hostname: crmcore.us.mydomain.com
+              sslCertArn: arn:aws:acm:us-east-1:XXXXXXXXXXXXXX:certificate/aaaaa-bbbb-cccc-dddd-eeee
+            env:
+              ENV: prod
+              LOG_DEBUG: false
+              SENTRY_ENABLED: true
+              SENTRY_DSN: https://XXXXXX:YYYYYYY@sentry.io/ZZZZZZ
+              SENTRY_ENVIRONMENT: production
