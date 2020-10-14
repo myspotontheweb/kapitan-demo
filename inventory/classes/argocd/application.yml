@@ -11,5 +11,5 @@ parameters:
         input_type: jsonnet
         output_type: yaml
         input_paths:
-          - components/argocd/application.jsonnet
+          - templates/argocd/application.jsonnet
 
