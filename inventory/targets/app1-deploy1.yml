@@ -9,3 +9,7 @@ parameters:
         parameters: 
           - name: env.LOG_LEVEL
             value: WARN
+    secret:
+      ONE: ?{base64:apps/app1-deploy1@ONE}
+      TWO: ?{base64:apps/app1-deploy1@TWO}
+      THREE: ?{base64:apps/app1-deploy1@THREE}

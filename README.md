@@ -6,7 +6,8 @@ Demo repo to try out Kapitan
 ```
 ── compiled                       
 │   ├── app1-deploy1
-│   │   └── application.yaml      # Compiled output YAML
+│   │   ├── application.yaml      # Application YAML
+│   │   └── secret.yaml           # Optional secret
 │   ├── app1-deploy2
 │   │   └── application.yaml
 │   └── app1-deploy3
