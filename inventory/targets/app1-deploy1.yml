@@ -9,3 +9,7 @@ parameters:
         parameters: 
           - name: env.LOG_LEVEL
             value: WARN
+    secret:
+      ONE: "uno"
+      TWO: "dos"
+      THREE: "tres"

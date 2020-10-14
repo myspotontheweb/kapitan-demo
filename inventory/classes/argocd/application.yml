@@ -12,4 +12,5 @@ parameters:
         output_type: yaml
         input_paths:
           - templates/argocd/application.jsonnet
+          - templates/argocd/application/secret.jsonnet
 
