@@ -1,0 +1,11 @@
+classes:
+  - myorg.apps.staging.app1
+
+parameters:
+  target_name: app1-deploy2
+  application:
+    source:
+      helm:
+        parameters: 
+          - name: env.LOG_LEVEL
+            value: DEBUG

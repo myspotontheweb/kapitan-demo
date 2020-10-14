@@ -1,7 +1,8 @@
 classes:
-  - teamwork.apps.crmcore
+  - myorg.apps.app1
 
 parameters:
   application:
     destination:
+      namespace: project1
       server: https://k8s-api.us.mydomain.com

@@ -1,9 +1,10 @@
 classes:
-  - teamwork.apps.crmcore
+  - myorg.apps.app1
 
 parameters:
   application:
     destination:
+      namespace: team-025
       server: https://k8s-api.staging.mydomain.com
     source:
       targetRevision: staging

@@ -1,0 +1,11 @@
+classes:
+  - myorg.apps.us.app1
+
+parameters:
+  target_name: app1-deploy1
+  application:
+    source:
+      helm:
+        parameters: 
+          - name: env.LOG_LEVEL
+            value: WARN

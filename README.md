@@ -1,32 +1,35 @@
 # kapitan-demo
 Demo repo to try out Kapitan
 
-## Structure
+## Project Structure
 
 ```
-├── compiled                           # Compiled output YAML
-│   ├── crmcore-staging
+── compiled                       # Compiled output YAML
+│   ├── app1-deploy1
 │   │   └── application.yaml
-│   └── crmcore-us
+│   ├── app1-deploy2
+│   │   └── application.yaml
+│   └── app1-deploy3
 │       └── application.yaml
 ├── inventory
-│   ├── classes                        
+│   ├── classes
 │   │   ├── argocd
-│   │   │   └── application.yml        # Class that defines how an application is generated 
+│   │   │   └── application.yml   # Class that defines how an application is generated 
 │   │   ├── common.yml
-│   │   └── teamwork
+│   │   └── myorg
 │   │       └── apps
-│   │           ├── crmcore.yml
+│   │           ├── app1.yml
 │   │           ├── staging
-│   │           │   └── crmcore.yml    # Application deployed to staging
+│   │           │   └── app1.yml  # Describes app deployed to staging
 │   │           └── us
-│   │               └── crmcore.yml    # Application deployed to us
+│   │               └── app1.yml  # Describes app deployed to us
 │   └── targets
-│       ├── crmcore-staging.yml        # Each generated application is represented as a target
-│       └── crmcore-us.yml
+│       ├── app1-deploy1.yml      # Apps to generated
+│       ├── app1-deploy2.yml
+│       └── app1-deploy3.yml
 ├── Makefile
 ├── README.md
-└── templates                          
+└── templates
     └── argocd
-        └── application.jsonnet        # Logic for generating output
+        └── application.jsonnet   # Logic for generating YAML
 ```

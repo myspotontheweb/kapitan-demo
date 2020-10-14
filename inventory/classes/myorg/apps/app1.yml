@@ -3,11 +3,11 @@ classes:
 
 parameters:
   application:
-    project: crm
+    project: proj1
     destination:
-      namespace: crm
+      namespace: proj1
       server: https://kubernetes.default.svc
     source:
-      path: deployment/crmcore
-      repoURL: git@github.com:Teamwork/crmcore.git
+      path: chart
+      repoURL: git@github.com:myorg/app1.git
       targetRevision: master
