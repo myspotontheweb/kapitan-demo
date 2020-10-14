@@ -59,3 +59,9 @@ stringData:
 type: Opaque
 ```
 
+These secrets designed to be safely committed to git and can be decoded as follows:
+
+```
+kapitan refs --reveal -f compiled/app1-deploy1/secret.yaml
+```
+
