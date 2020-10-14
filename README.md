@@ -1,5 +1,5 @@
 # kapitan-demo
-Demo repo to try out Kapitan
+Demo repo to try out [Kapitan](https://kapitan.dev/)
 
 ## Project Structure
 
@@ -30,7 +30,30 @@ Demo repo to try out Kapitan
 │       └── app1-deploy3.yml
 ├── Makefile
 ├── README.md
+├── refs
+│   └── apps
+│       └── app1-deploy1
 └── templates
     └── argocd
         └── application.jsonnet   # Logic for generating YAML
 ```
+
+### Secrets
+
+The generated secret requires installation of the [tesoro](https://github.com/kapicorp/tesoro) admissions controller to decrypt/decode the data.
+
+```
+apiVersion: v1
+kind: Secret
+metadata:
+  labels:
+    tesoro.kapicorp.com: enabled
+  name: app1-deploy1
+  namespace: project1
+stringData:
+  ONE: ?{base64:eyJkYXRhIjogIlQwNUZPaUIxYm04S1ZFaFNSVVU2SUhSeVpYTUtWRmRQT2lCa2IzTUsiLCAiZW5jb2RpbmciOiAib3JpZ2luYWwiLCAidHlwZSI6ICJiYXNlNjQiLCAiZW1iZWRkZWRfc3VidmFyX3BhdGgiOiAiT05FIn0=:embedded}
+  THREE: ?{base64:eyJkYXRhIjogIlQwNUZPaUIxYm04S1ZFaFNSVVU2SUhSeVpYTUtWRmRQT2lCa2IzTUsiLCAiZW5jb2RpbmciOiAib3JpZ2luYWwiLCAidHlwZSI6ICJiYXNlNjQiLCAiZW1iZWRkZWRfc3VidmFyX3BhdGgiOiAiVEhSRUUifQ==:embedded}
+  TWO: ?{base64:eyJkYXRhIjogIlQwNUZPaUIxYm04S1ZFaFNSVVU2SUhSeVpYTUtWRmRQT2lCa2IzTUsiLCAiZW5jb2RpbmciOiAib3JpZ2luYWwiLCAidHlwZSI6ICJiYXNlNjQiLCAiZW1iZWRkZWRfc3VidmFyX3BhdGgiOiAiVFdPIn0=:embedded}
+type: Opaque
+```
+
