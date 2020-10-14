@@ -35,6 +35,8 @@ Demo repo to try out [Kapitan](https://kapitan.dev/)
 │       └── app1-deploy1
 └── templates
     └── argocd
+        ├── application
+        │   └── secret.jsonnet
         └── application.jsonnet   # Logic for generating YAML
 ```
 
