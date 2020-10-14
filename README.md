@@ -4,9 +4,9 @@ Demo repo to try out Kapitan
 ## Project Structure
 
 ```
-── compiled                       # Compiled output YAML
+── compiled                       
 │   ├── app1-deploy1
-│   │   └── application.yaml
+│   │   └── application.yaml      # Compiled output YAML
 │   ├── app1-deploy2
 │   │   └── application.yaml
 │   └── app1-deploy3
@@ -14,7 +14,7 @@ Demo repo to try out Kapitan
 ├── inventory
 │   ├── classes
 │   │   ├── argocd
-│   │   │   └── application.yml   # Class that defines how an application is generated 
+│   │   │   └── application.yml   # Class that defines how YAML is generated 
 │   │   ├── common.yml
 │   │   └── myorg
 │   │       └── apps
@@ -24,7 +24,7 @@ Demo repo to try out Kapitan
 │   │           └── us
 │   │               └── app1.yml  # Describes app deployed to us
 │   └── targets
-│       ├── app1-deploy1.yml      # Apps to generated
+│       ├── app1-deploy1.yml      # App to be generated
 │       ├── app1-deploy2.yml
 │       └── app1-deploy3.yml
 ├── Makefile
