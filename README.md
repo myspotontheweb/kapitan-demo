@@ -71,13 +71,25 @@ echo "shared-creds/us/ops/ping:USERNAME" | kapitan refs --write "vaultkv:us/data
 echo "shared-creds/us/ops/ping:PASSWORD" | kapitan refs --write "vaultkv:us/database/password" -t app1-deploy2 -f -
 ```
 
+and you can see the secret references being used in the target configuration
+
+* [inventory/targets/app1-deploy2.yml](inventory/targets/app1-deploy2.yml)
+
 ### Reveal
 
-To reveal the secrets (via vault API call):
+The generated K8s secret contains embedded references to secrets located in vault
+
+* [compiled/app1-deploy2/secret.yaml](compiled/app1-deploy2/secret.yaml)
+
+These can be decoded locally as follows:
 
 ```
 export VAULT_TOKEN=<github-api-token-goes-here>
 
 kapitan refs --reveal -f compiled/app1-deploy2/secret.yaml
 ```
+
+Note:
+
+* This will only work if you are authorized to access the configured vault server
 
