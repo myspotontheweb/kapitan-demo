@@ -1,3 +1,16 @@
+
+Table of Contents
+=================
+
+   * [kapitan-demo](#kapitan-demo)
+   * [Project Structure](#project-structure)
+   * [Secrets](#secrets)
+      * [Vault](#vault)
+         * [Setup](#setup)
+         * [Reveal](#reveal)
+
+Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
+
 # kapitan-demo
 
 Demo repo to try out [Kapitan](https://kapitan.dev/)
@@ -43,38 +56,9 @@ Demo repo to try out [Kapitan](https://kapitan.dev/)
 
 # Secrets 
 
-## Base64
-
-The generated secret requires installation of the [tesoro](https://github.com/kapicorp/tesoro) admissions controller to decrypt/decode the data.
-
-```
-apiVersion: v1
-kind: Secret
-metadata:
-  labels:
-    tesoro.kapicorp.com: enabled
-  name: app1-deploy1
-  namespace: project1
-stringData:
-  ONE: ?{base64:eyJkYXRhIjogIlQwNUZPaUIxYm04S1ZFaFNSVVU2SUhSeVpYTUtWRmRQT2lCa2IzTUsiLCAiZW5jb2RpbmciOiAib3JpZ2luYWwiLCAidHlwZSI6ICJiYXNlNjQiLCAiZW1iZWRkZWRfc3VidmFyX3BhdGgiOiAiT05FIn0=:embedded}
-  THREE: ?{base64:eyJkYXRhIjogIlQwNUZPaUIxYm04S1ZFaFNSVVU2SUhSeVpYTUtWRmRQT2lCa2IzTUsiLCAiZW5jb2RpbmciOiAib3JpZ2luYWwiLCAidHlwZSI6ICJiYXNlNjQiLCAiZW1iZWRkZWRfc3VidmFyX3BhdGgiOiAiVEhSRUUifQ==:embedded}
-  TWO: ?{base64:eyJkYXRhIjogIlQwNUZPaUIxYm04S1ZFaFNSVVU2SUhSeVpYTUtWRmRQT2lCa2IzTUsiLCAiZW5jb2RpbmciOiAib3JpZ2luYWwiLCAidHlwZSI6ICJiYXNlNjQiLCAiZW1iZWRkZWRfc3VidmFyX3BhdGgiOiAiVFdPIn0=:embedded}
-type: Opaque
-```
-
-These secrets designed to be safely committed to git (see note) and can be decoded as follows:
-
-```
-kapitan refs --reveal -f compiled/app1-deploy1/secret.yaml
-```
-
-Note:
-
-* Secrets of type "plain" or "base64" are designed to use in demos. Use one of the supported encryption types for production. 
-
 ## Vault 
 
-## Setup
+### Setup
 
 The vault details are configured here:
 
@@ -87,12 +71,13 @@ echo "shared-creds/us/ops/ping:USERNAME" | kapitan refs --write "vaultkv:us/data
 echo "shared-creds/us/ops/ping:PASSWORD" | kapitan refs --write "vaultkv:us/database/password" -t app1-deploy2 -f -
 ```
 
-## Reveal
+### Reveal
 
 To reveal the secrets (via vault API call):
 
 ```
 export VAULT_TOKEN=<github-api-token-goes-here>
+
 kapitan refs --reveal -f compiled/app1-deploy2/secret.yaml
 ```
 
