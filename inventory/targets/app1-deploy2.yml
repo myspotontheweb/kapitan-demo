@@ -9,3 +9,8 @@ parameters:
         parameters: 
           - name: env.LOG_LEVEL
             value: DEBUG
+    secret:
+      DB_HOST: ?{vaultkv:staging/database/hostname}
+      DB_NAME: ?{vaultkv:staging/database/username}
+      DB_PASS: ?{vaultkv:staging/database/password}
+

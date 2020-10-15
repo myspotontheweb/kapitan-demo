@@ -1,70 +1,129 @@
+Table of Contents
+=================
+
+   * [Table of Contents](#table-of-contents)
+   * [kapitan-demo](#kapitan-demo)
+   * [Project Structure](#project-structure)
+      * [compiled directory](#compiled-directory)
+      * [inventory directory](#inventory-directory)
+      * [templates directory](#templates-directory)
+   * [Secrets](#secrets)
+      * [Vault](#vault)
+         * [Setup](#setup)
+         * [Reveal](#reveal)
+
+Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
+
 # kapitan-demo
+
 Demo repo to try out [Kapitan](https://kapitan.dev/)
 
-## Project Structure
+# Project Structure
 
 ```
-── compiled                       
+├── compiled
 │   ├── app1-deploy1
-│   │   ├── application.yaml      # Application YAML
-│   │   └── secret.yaml           # Optional secret
+│   │   ├── application.yaml
+│   │   └── secret.yaml
 │   ├── app1-deploy2
-│   │   └── application.yaml
+│   │   ├── application.yaml
+│   │   └── secret.yaml
 │   └── app1-deploy3
 │       └── application.yaml
 ├── inventory
 │   ├── classes
 │   │   ├── argocd
-│   │   │   └── application.yml   # Class that defines how YAML is generated 
+│   │   │   └── application.yml
 │   │   ├── common.yml
 │   │   └── myorg
 │   │       └── apps
 │   │           ├── app1.yml
 │   │           ├── staging
-│   │           │   └── app1.yml  # Describes app deployed to staging
+│   │           │   └── app1.yml
 │   │           └── us
-│   │               └── app1.yml  # Describes app deployed to us
+│   │               └── app1.yml
 │   └── targets
-│       ├── app1-deploy1.yml      # App to be generated
+│       ├── app1-deploy1.yml
 │       ├── app1-deploy2.yml
 │       └── app1-deploy3.yml
 ├── Makefile
 ├── README.md
 ├── refs
-│   └── apps
-│       └── app1-deploy1
+│   ├── apps
+│   │   └── app1-deploy1
+│   └── staging
+│       └── database
+│           ├── hostname
+│           ├── password
+│           └── username
 └── templates
     └── argocd
         ├── application
         │   └── secret.jsonnet
-        └── application.jsonnet   # Logic for generating YAML
+        └── application.jsonnet
 ```
 
-### Secrets
+## compiled directory
 
-The generated secret requires installation of the [tesoro](https://github.com/kapicorp/tesoro) admissions controller to decrypt/decode the data.
+Contains the generated the YAML output that can be synced against the K8s cluster (using ```kubectl apply``` or ArgoCD)
+
+## inventory directory
+
+Kapitan will render the files contained in **targets** subdirectory. 
+
+* [inventory/targets/app1-deploy1.yml](inventory/targets/app1-deploy1.yml)
+* [inventory/targets/app1-deploy2.yml](inventory/targets/app1-deploy2.yml)
+* [inventory/targets/app1-deploy3.yml](inventory/targets/app1-deploy3.yml)
+
+In these examples there are 3 different deployments of app1. 
+
+The following files are worthy of mention:
+
+* [inventory/classes/common.yml](inventory/classes/common.yml) Contains shared configuration, like for example the vault settings
+* [inventory/classes/argocd/application.yml](inventory/classes/argocd/application.yml) Contains the configuration that controls how the output YAML is generated
+* [inventory/classes/myorg/apps/app1.yml](inventory/classes/myorg/apps/app1.yml) Base class for all deployments of 'app1'. The region differences are in the child classes
+
+## templates directory
+
+Jsonnet files used to generate the YAML
+
+# Secrets 
+
+## Vault 
+
+### Setup
+
+The vault details are configured here:
+
+* [inventory/classes/common.yml](inventory/classes/common.yml)
+
+Kapitan references to vault secrets are created as follows:
 
 ```
-apiVersion: v1
-kind: Secret
-metadata:
-  labels:
-    tesoro.kapicorp.com: enabled
-  name: app1-deploy1
-  namespace: project1
-stringData:
-  ONE: ?{base64:eyJkYXRhIjogIlQwNUZPaUIxYm04S1ZFaFNSVVU2SUhSeVpYTUtWRmRQT2lCa2IzTUsiLCAiZW5jb2RpbmciOiAib3JpZ2luYWwiLCAidHlwZSI6ICJiYXNlNjQiLCAiZW1iZWRkZWRfc3VidmFyX3BhdGgiOiAiT05FIn0=:embedded}
-  THREE: ?{base64:eyJkYXRhIjogIlQwNUZPaUIxYm04S1ZFaFNSVVU2SUhSeVpYTUtWRmRQT2lCa2IzTUsiLCAiZW5jb2RpbmciOiAib3JpZ2luYWwiLCAidHlwZSI6ICJiYXNlNjQiLCAiZW1iZWRkZWRfc3VidmFyX3BhdGgiOiAiVEhSRUUifQ==:embedded}
-  TWO: ?{base64:eyJkYXRhIjogIlQwNUZPaUIxYm04S1ZFaFNSVVU2SUhSeVpYTUtWRmRQT2lCa2IzTUsiLCAiZW5jb2RpbmciOiAib3JpZ2luYWwiLCAidHlwZSI6ICJiYXNlNjQiLCAiZW1iZWRkZWRfc3VidmFyX3BhdGgiOiAiVFdPIn0=:embedded}
-type: Opaque
+echo "shared-creds/staging/global/vars:GLOBAL_DB_HOST" | kapitan refs --write "vaultkv:staging/database/hostname" -t app1-deploy2 -f -
+echo "shared-creds/staging/global/vars:GLOBAL_DB_USER" | kapitan refs --write "vaultkv:staging/database/username" -t app1-deploy2 -f -
+echo "shared-creds/staging/global/vars:GLOBAL_DB_PASS" | kapitan refs --write "vaultkv:staging/database/password" -t app1-deploy2 -f -
 ```
 
-These secrets designed to be safely committed to git (see note) and can be decoded as follows:
+and you can see the secret references being used in the target configuration
+
+* [inventory/targets/app1-deploy2.yml](inventory/targets/app1-deploy2.yml)
+
+### Reveal
+
+The generated K8s secret contains embedded references to secrets located in vault
+
+* [compiled/app1-deploy2/secret.yaml](compiled/app1-deploy2/secret.yaml)
+
+These can be decoded locally as follows:
 
 ```
-kapitan refs --reveal -f compiled/app1-deploy1/secret.yaml
+export VAULT_TOKEN=<github-api-token-goes-here>
+
+kapitan refs --reveal -f compiled/app1-deploy2/secret.yaml
 ```
 
 Note:
 
-* Secrets of type "plain" or "base64" are designed to use in demos. Use one of the supported encryption types for production. 
+* This will only work if you are authorized to access the configured vault server
+
