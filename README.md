@@ -1,9 +1,12 @@
-
 Table of Contents
 =================
 
+   * [Table of Contents](#table-of-contents)
    * [kapitan-demo](#kapitan-demo)
    * [Project Structure](#project-structure)
+      * [compiled directory](#compiled-directory)
+      * [inventory directory](#inventory-directory)
+      * [templates directory](#templates-directory)
    * [Secrets](#secrets)
       * [Vault](#vault)
          * [Setup](#setup)
