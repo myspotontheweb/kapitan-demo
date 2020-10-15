@@ -18,41 +18,71 @@ Demo repo to try out [Kapitan](https://kapitan.dev/)
 # Project Structure
 
 ```
-── compiled                       
+├── compiled
 │   ├── app1-deploy1
-│   │   ├── application.yaml      # Application YAML
-│   │   └── secret.yaml           # Optional secret
+│   │   ├── application.yaml
+│   │   └── secret.yaml
 │   ├── app1-deploy2
-│   │   └── application.yaml
+│   │   ├── application.yaml
+│   │   └── secret.yaml
 │   └── app1-deploy3
 │       └── application.yaml
 ├── inventory
 │   ├── classes
 │   │   ├── argocd
-│   │   │   └── application.yml   # Class that defines how YAML is generated 
+│   │   │   └── application.yml
 │   │   ├── common.yml
 │   │   └── myorg
 │   │       └── apps
 │   │           ├── app1.yml
 │   │           ├── staging
-│   │           │   └── app1.yml  # Describes app deployed to staging
+│   │           │   └── app1.yml
 │   │           └── us
-│   │               └── app1.yml  # Describes app deployed to us
+│   │               └── app1.yml
 │   └── targets
-│       ├── app1-deploy1.yml      # App to be generated
+│       ├── app1-deploy1.yml
 │       ├── app1-deploy2.yml
 │       └── app1-deploy3.yml
 ├── Makefile
 ├── README.md
 ├── refs
-│   └── apps
-│       └── app1-deploy1
+│   ├── apps
+│   │   └── app1-deploy1
+│   └── staging
+│       └── database
+│           ├── hostname
+│           ├── password
+│           └── username
 └── templates
     └── argocd
         ├── application
         │   └── secret.jsonnet
-        └── application.jsonnet   # Logic for generating YAML
+        └── application.jsonnet
 ```
+
+## compiled directory
+
+Contains the generated the YAML output that can be synced against the K8s cluster (using ```kubectl apply``` or ArgoCD)
+
+## inventory directory
+
+Kapitan will render the files contained in **targets** subdirectory. 
+
+* [inventory/targets/app1-deploy1.yml](inventory/targets/app1-deploy1.yml)
+* [inventory/targets/app1-deploy2.yml](inventory/targets/app1-deploy2.yml)
+* [inventory/targets/app1-deploy3.yml](inventory/targets/app1-deploy3.yml)
+
+In these examples there are 3 different deployments of app1. 
+
+The following files are worthy of mention:
+
+* [inventory/classes/common.yml](inventory/classes/common.yml) Contains shared configuration, like for example the vault settings
+* [inventory/classes/argocd/application.yml](inventory/classes/argocd/application.yml) Contains the configuration that controls how the output YAML is generated
+* [inventory/classes/myorg/apps/app1.yml](inventory/classes/myorg/apps/app1.yml) Base class for all deployments of 'app1'. The region differences are in the child classes
+
+## templates directory
+
+Jsonnet files used to generate the YAML
 
 # Secrets 
 
@@ -67,8 +97,9 @@ The vault details are configured here:
 Kapitan references to vault secrets are created as follows:
 
 ```
-echo "shared-creds/us/ops/ping:USERNAME" | kapitan refs --write "vaultkv:us/database/username" -t app1-deploy2 -f -
-echo "shared-creds/us/ops/ping:PASSWORD" | kapitan refs --write "vaultkv:us/database/password" -t app1-deploy2 -f -
+echo "shared-creds/staging/global/vars:GLOBAL_DB_HOST" | kapitan refs --write "vaultkv:staging/database/hostname" -t app1-deploy2 -f -
+echo "shared-creds/staging/global/vars:GLOBAL_DB_USER" | kapitan refs --write "vaultkv:staging/database/username" -t app1-deploy2 -f -
+echo "shared-creds/staging/global/vars:GLOBAL_DB_PASS" | kapitan refs --write "vaultkv:staging/database/password" -t app1-deploy2 -f -
 ```
 
 and you can see the secret references being used in the target configuration
