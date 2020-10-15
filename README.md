@@ -1,7 +1,8 @@
 # kapitan-demo
+
 Demo repo to try out [Kapitan](https://kapitan.dev/)
 
-## Project Structure
+# Project Structure
 
 ```
 ── compiled                       
@@ -40,7 +41,9 @@ Demo repo to try out [Kapitan](https://kapitan.dev/)
         └── application.jsonnet   # Logic for generating YAML
 ```
 
-### Secrets
+# Secrets 
+
+## Base64
 
 The generated secret requires installation of the [tesoro](https://github.com/kapicorp/tesoro) admissions controller to decrypt/decode the data.
 
@@ -68,3 +71,28 @@ kapitan refs --reveal -f compiled/app1-deploy1/secret.yaml
 Note:
 
 * Secrets of type "plain" or "base64" are designed to use in demos. Use one of the supported encryption types for production. 
+
+## Vault 
+
+## Setup
+
+The vault details are configured here:
+
+* [inventory/classes/common.yml](inventory/classes/common.yml)
+
+Kapitan references to vault secrets are created as follows:
+
+```
+echo "shared-creds/us/ops/ping:USERNAME" | kapitan refs --write "vaultkv:us/database/username" -t app1-deploy2 -f -
+echo "shared-creds/us/ops/ping:PASSWORD" | kapitan refs --write "vaultkv:us/database/password" -t app1-deploy2 -f -
+```
+
+## Reveal
+
+To reveal the secrets (via vault API call):
+
+```
+export VAULT_TOKEN=<github-api-token-goes-here>
+kapitan refs --reveal -f compiled/app1-deploy2/secret.yaml
+```
+
