@@ -30,10 +30,12 @@ Demo repo to try out [Kapitan](https://kapitan.dev/)
 │   │   └── secret.yaml
 │   └── app1-deploy3
 │       └── application.yaml
+├── components
+│   └── application
+│       └── main.jsonnet
 ├── inventory
 │   ├── classes
-│   │   ├── argocd
-│   │   │   └── application.yml
+│   │   ├── application.yml
 │   │   ├── common.yml
 │   │   └── myorg
 │   │       └── apps
@@ -48,19 +50,16 @@ Demo repo to try out [Kapitan](https://kapitan.dev/)
 │       └── app1-deploy3.yml
 ├── Makefile
 ├── README.md
-├── refs
-│   ├── apps
-│   │   └── app1-deploy1
-│   └── staging
-│       └── database
-│           ├── hostname
-│           ├── password
-│           └── username
-└── templates
-    └── argocd
-        ├── application
-        │   └── secret.jsonnet
-        └── application.jsonnet
+└── refs
+    ├── global
+    │   └── staging
+    │       └── database
+    │           ├── hostname
+    │           ├── password
+    │           └── username
+    └── targets
+        └── app1-deploy1
+            └── secrets
 ```
 
 ## compiled directory
@@ -80,12 +79,18 @@ In these examples there are 3 different deployments of app1.
 The following files are worthy of mention:
 
 * [inventory/classes/common.yml](inventory/classes/common.yml) Contains shared configuration, like for example the vault settings
-* [inventory/classes/argocd/application.yml](inventory/classes/argocd/application.yml) Contains the configuration that controls how the output YAML is generated
+* [inventory/classes/application.yml](inventory/classes/application.yml) Contains the configuration that controls how the output YAML is generated
 * [inventory/classes/myorg/apps/app1.yml](inventory/classes/myorg/apps/app1.yml) Base class for all deployments of 'app1'. The region differences are in the child classes
 
-## templates directory
+## components directory
 
-Jsonnet files used to generate the YAML
+Holds the jsonnet logic that generates the artifacts associated with an application
+
+* [components/application/main.jsonnet](components/application/main.jsonnet)
+
+## refs directory
+
+This is where references to secrets are stored.
 
 # Secrets 
 
@@ -97,12 +102,12 @@ The vault details are configured here:
 
 * [inventory/classes/common.yml](inventory/classes/common.yml)
 
-Kapitan references to vault secrets are created as follows:
+Create the kapitan references to secrets in vault
 
 ```
-echo "shared-creds/staging/global/vars:GLOBAL_DB_HOST" | kapitan refs --write "vaultkv:staging/database/hostname" -t app1-deploy2 -f -
-echo "shared-creds/staging/global/vars:GLOBAL_DB_USER" | kapitan refs --write "vaultkv:staging/database/username" -t app1-deploy2 -f -
-echo "shared-creds/staging/global/vars:GLOBAL_DB_PASS" | kapitan refs --write "vaultkv:staging/database/password" -t app1-deploy2 -f -
+echo "shared-creds/staging/global/vars:GLOBAL_DB_HOST" | kapitan refs --write "vaultkv:global/staging/database/hostname" -t app1-deploy2 -f -
+echo "shared-creds/staging/global/vars:GLOBAL_DB_USER" | kapitan refs --write "vaultkv:global/staging/database/username" -t app1-deploy2 -f -
+echo "shared-creds/staging/global/vars:GLOBAL_DB_PASS" | kapitan refs --write "vaultkv:global/staging/database/password" -t app1-deploy2 -f -
 ```
 
 and you can see the secret references being used in the target configuration

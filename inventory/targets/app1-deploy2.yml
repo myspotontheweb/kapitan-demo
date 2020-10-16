@@ -1,4 +1,5 @@
 classes:
+  - common
   - myorg.apps.staging.app1
 
 parameters:
@@ -10,7 +11,7 @@ parameters:
           - name: env.LOG_LEVEL
             value: DEBUG
     secret:
-      DB_HOST: ?{vaultkv:staging/database/hostname}
-      DB_NAME: ?{vaultkv:staging/database/username}
-      DB_PASS: ?{vaultkv:staging/database/password}
+      DB_HOST: ?{vaultkv:global/staging/database/hostname}
+      DB_NAME: ?{vaultkv:global/staging/database/username}
+      DB_PASS: ?{vaultkv:global/staging/database/password}
 

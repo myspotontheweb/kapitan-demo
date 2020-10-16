@@ -1,4 +1,5 @@
 classes:
+  - common
   - myorg.apps.us.app1
 
 parameters:
@@ -10,6 +11,6 @@ parameters:
           - name: env.LOG_LEVEL
             value: WARN
     secret:
-      ONE: ?{base64:apps/app1-deploy1@ONE}
-      TWO: ?{base64:apps/app1-deploy1@TWO}
-      THREE: ?{base64:apps/app1-deploy1@THREE}
+      ONE: ?{base64:targets/${target_name}/secrets@ONE}
+      TWO: ?{base64:targets/${target_name}/secrets@TWO}
+      THREE: ?{base64:targets/${target_name}/secrets@THREE}
