@@ -88,6 +88,10 @@ Holds the jsonnet logic that generates the artifacts associated with an applicat
 
 * [components/application/main.jsonnet](components/application/main.jsonnet)
 
+## refs directory
+
+This is where references to secrets are stored.
+
 # Secrets 
 
 ## Vault 
