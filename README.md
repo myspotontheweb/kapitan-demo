@@ -120,11 +120,15 @@ The generated K8s secret contains embedded references to secrets located in vaul
 
 * [compiled/app1-deploy2/secret.yaml](compiled/app1-deploy2/secret.yaml)
 
-These can be decoded locally as follows:
+To decode locally you first need to login to vault (details may vary)
 
 ```
 vault login -no-print -method=github token=XXXXXXXXXXXXXXXX
+```
 
+And then run the reveal command
+
+```
 kapitan refs --reveal -f compiled/app1-deploy2/secret.yaml
 ```
 
