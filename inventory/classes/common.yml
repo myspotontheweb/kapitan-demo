@@ -4,7 +4,7 @@ parameters:
       target: ${target_name}
     secrets:
       vaultkv:
-        auth: github
+        auth: token
         engine: kv-v2
         VAULT_ADDR: https://vault.us.teamworkops.com
         VAULT_SKIP_VERIFY: true

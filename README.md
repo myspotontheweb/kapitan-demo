@@ -123,7 +123,7 @@ The generated K8s secret contains embedded references to secrets located in vaul
 These can be decoded locally as follows:
 
 ```
-export VAULT_TOKEN=<github-api-token-goes-here>
+vault login -no-print -method=github token=XXXXXXXXXXXXXXXX
 
 kapitan refs --reveal -f compiled/app1-deploy2/secret.yaml
 ```
