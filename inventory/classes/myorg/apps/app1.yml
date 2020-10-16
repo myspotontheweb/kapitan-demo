@@ -1,13 +1,10 @@
 classes:
-  - argocd.application
+  - application
 
 parameters:
   application:
     project: proj1
     destination:
       namespace: proj1
-      server: https://kubernetes.default.svc
     source:
-      path: chart
       repoURL: git@github.com:myorg/app1.git
-      targetRevision: master

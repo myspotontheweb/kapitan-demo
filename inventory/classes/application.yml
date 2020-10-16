@@ -1,0 +1,21 @@
+parameters:
+  argocd:
+    namespace: argocd
+  application:
+    project: REPLACEME
+    destination:
+      namespace: REPLACEME
+      server: https://kubernetes.default.svc
+    source:
+      path: chart
+      repoURL: git@github.com:REPLACEME/REPLACEME.git
+      targetRevision: master
+
+  kapitan:
+    compile:
+      - output_path: .
+        input_type: jsonnet
+        output_type: yaml
+        input_paths:
+          - components/application/main.jsonnet
+

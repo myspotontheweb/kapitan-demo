@@ -1,4 +1,4 @@
 version: 0.29
 compile:
- prune: false
+ prune: true
  embed-refs: true
