@@ -67,8 +67,7 @@ Contains the generated the YAML output that can be synced against the K8s cluste
 
 Kapitan will render the files contained in **targets** subdirectory. 
 
-* [inventory/targets/app1-deploy1.yml](inventory/targets/app1-deploy1.yml)
-* [inventory/targets/app1-deploy2.yml](inventory/targets/app1-deploy2.yml)
+* [inventory/classes/myorg/apps/app1.yml](inventory/classes/myorg/apps/app1.yml)
 
 In these examples there are 3 different deployments of app1. 
 
