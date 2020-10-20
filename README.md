@@ -82,7 +82,7 @@ The following files are worthy of mention:
 * [inventory/classes/common.yml](inventory/classes/common.yml) Contains shared configuration, like for example the vault settings
 * [inventory/classes/application.yml](inventory/classes/application.yml) Contains the configuration that controls how the output YAML is generated
 * [inventory/classes/myorg/apps/app1.yml](inventory/classes/myorg/apps/app1.yml) Base class for 'app1' deployments
-* [inventory/classes/myorg/apps/app2.yml](inventory/classes/myorg/apps/app1.yml) Base class for 'app2' deployments
+* [inventory/classes/myorg/apps/app2.yml](inventory/classes/myorg/apps/app2.yml) Base class for 'app2' deployments
 
 ## components directory
 
