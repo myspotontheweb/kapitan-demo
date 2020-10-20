@@ -1,4 +1,5 @@
 parameters:
+  region: REPLACE_ME
   kapitan:
     vars:
       target: ${target_name}

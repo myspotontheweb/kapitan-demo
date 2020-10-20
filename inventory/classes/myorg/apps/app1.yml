@@ -2,7 +2,6 @@ classes:
   - application
 
 parameters:
-  region: REPLACE_ME
   application:
     project: proj1
     destination:
