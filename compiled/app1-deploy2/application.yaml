@@ -7,8 +7,8 @@ metadata:
   namespace: argocd
 spec:
   destination:
-    namespace: project1
-    server: https://k8s-api.us.mydomain.com
+    namespace: proj1
+    server: https://kubernetes.default.svc
   project: proj1
   source:
     helm:

@@ -1,9 +1,0 @@
-classes:
-  - myorg.apps.app1
-
-parameters:
-  region: us
-  application:
-    destination:
-      namespace: project1
-      server: https://k8s-api.us.mydomain.com

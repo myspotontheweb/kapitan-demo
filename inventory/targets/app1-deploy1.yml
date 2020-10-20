@@ -1,6 +1,10 @@
 classes:
   - common
-  - myorg.apps.staging.app1
+  - myorg.apps.app1
 
 parameters:
   target_name: app1-deploy1
+  region: staging
+  application:
+    source:
+      targetRevision: staging

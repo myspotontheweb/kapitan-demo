@@ -25,7 +25,10 @@ Demo repo to try out [Kapitan](https://kapitan.dev/)
 │   ├── app1-deploy1
 │   │   ├── application.yaml
 │   │   └── secret.yaml
-│   └── app1-deploy2
+│   ├── app1-deploy2
+│   │   ├── application.yaml
+│   │   └── secret.yaml
+│   └── app2-deploy1
 │       ├── application.yaml
 │       └── secret.yaml
 ├── components
@@ -38,13 +41,11 @@ Demo repo to try out [Kapitan](https://kapitan.dev/)
 │   │   └── myorg
 │   │       └── apps
 │   │           ├── app1.yml
-│   │           ├── staging
-│   │           │   └── app1.yml
-│   │           └── us
-│   │               └── app1.yml
+│   │           └── app2.yml
 │   └── targets
 │       ├── app1-deploy1.yml
-│       └── app1-deploy2.yml
+│       ├── app1-deploy2.yml
+│       └── app2-deploy1.yml
 ├── Makefile
 ├── README.md
 └── refs
@@ -72,6 +73,7 @@ Kapitan will render the files contained in **targets** subdirectory.
 
 * [inventory/targets/app1-deploy1.yml](inventory/targets/app1-deploy1.yml)
 * [inventory/targets/app1-deploy2.yml](inventory/targets/app1-deploy2.yml)
+* [inventory/targets/app2-deploy1.yml](inventory/targets/app2-deploy1.yml)
 
 In these examples there are 3 different deployments of app1. 
 
@@ -79,7 +81,8 @@ The following files are worthy of mention:
 
 * [inventory/classes/common.yml](inventory/classes/common.yml) Contains shared configuration, like for example the vault settings
 * [inventory/classes/application.yml](inventory/classes/application.yml) Contains the configuration that controls how the output YAML is generated
-* [inventory/classes/myorg/apps/app1.yml](inventory/classes/myorg/apps/app1.yml) Base class for all deployments of 'app1'. The region differences are in the child classes
+* [inventory/classes/myorg/apps/app1.yml](inventory/classes/myorg/apps/app1.yml) Base class for 'app1' deployments
+* [inventory/classes/myorg/apps/app2.yml](inventory/classes/myorg/apps/app1.yml) Base class for 'app2' deployments
 
 ## components directory
 
@@ -113,9 +116,10 @@ echo "shared-creds/us/global/vars:GLOBAL_DB_USER" | kapitan refs --write "vaultk
 echo "shared-creds/us/global/vars:GLOBAL_DB_PASS" | kapitan refs --write "vaultkv:global/us/database/password" -t app1-deploy2 -f -
 ```
 
-and you can see the secret references being used in the inherited class configuration
+and you can see the secret referenced in the application classes
 
 * [inventory/classes/myorg/apps/app1.yml](inventory/classes/myorg/apps/app1.yml)
+* [inventory/classes/myorg/apps/app2.yml](inventory/classes/myorg/apps/app2.yml)
 
 ### Reveal
 
@@ -123,6 +127,7 @@ The generated K8s secret contains embedded references to secrets located in vaul
 
 * [compiled/app1-deploy1/secret.yaml](compiled/app1-deploy1/secret.yaml)
 * [compiled/app1-deploy2/secret.yaml](compiled/app1-deploy2/secret.yaml)
+* [compiled/app2-deploy1/secret.yaml](compiled/app2-deploy1/secret.yaml)
 
 To decode locally you first need to login to vault (details may vary)
 
@@ -135,6 +140,7 @@ And then run the reveal command
 ```
 kapitan refs --reveal -f compiled/app1-deploy1/secret.yaml
 kapitan refs --reveal -f compiled/app1-deploy2/secret.yaml
+kapitan refs --reveal -f compiled/app2-deploy1/secret.yaml
 ```
 
 Note:
