@@ -7,8 +7,8 @@ metadata:
   namespace: argocd
 spec:
   destination:
-    namespace: team-025
-    server: https://k8s-api.staging.mydomain.com
+    namespace: project1
+    server: https://k8s-api.us.mydomain.com
   project: proj1
   source:
     helm:
@@ -17,4 +17,4 @@ spec:
           value: DEBUG
     path: chart
     repoURL: git@github.com:myorg/app1.git
-    targetRevision: staging
+    targetRevision: master

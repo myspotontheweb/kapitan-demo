@@ -9,3 +9,4 @@ parameters:
       server: https://k8s-api.staging.mydomain.com
     source:
       targetRevision: staging
+

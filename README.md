@@ -26,10 +26,8 @@ Demo repo to try out [Kapitan](https://kapitan.dev/)
 │   │   ├── application.yaml
 │   │   └── secret.yaml
 │   ├── app1-deploy2
-│   │   ├── application.yaml
-│   │   └── secret.yaml
-│   └── app1-deploy3
-│       └── application.yaml
+│       ├── application.yaml
+│       └── secret.yaml
 ├── components
 │   └── application
 │       └── main.jsonnet
@@ -47,7 +45,6 @@ Demo repo to try out [Kapitan](https://kapitan.dev/)
 │   └── targets
 │       ├── app1-deploy1.yml
 │       ├── app1-deploy2.yml
-│       └── app1-deploy3.yml
 ├── Makefile
 ├── README.md
 └── refs
@@ -72,7 +69,6 @@ Kapitan will render the files contained in **targets** subdirectory.
 
 * [inventory/targets/app1-deploy1.yml](inventory/targets/app1-deploy1.yml)
 * [inventory/targets/app1-deploy2.yml](inventory/targets/app1-deploy2.yml)
-* [inventory/targets/app1-deploy3.yml](inventory/targets/app1-deploy3.yml)
 
 In these examples there are 3 different deployments of app1. 
 
@@ -105,26 +101,26 @@ The vault details are configured here:
 Create the kapitan references to secrets in vault
 
 ```
-echo "shared-creds/staging/global/vars:GLOBAL_DB_HOST" | kapitan refs --write "vaultkv:global/staging/database/hostname" -t app1-deploy2 -f -
-echo "shared-creds/staging/global/vars:GLOBAL_DB_USER" | kapitan refs --write "vaultkv:global/staging/database/username" -t app1-deploy2 -f -
-echo "shared-creds/staging/global/vars:GLOBAL_DB_PASS" | kapitan refs --write "vaultkv:global/staging/database/password" -t app1-deploy2 -f -
+echo "shared-creds/staging/global/vars:GLOBAL_DB_HOST" | kapitan refs --write "vaultkv:global/staging/database/hostname" -t app1-deploy1 -f -
+echo "shared-creds/staging/global/vars:GLOBAL_DB_USER" | kapitan refs --write "vaultkv:global/staging/database/username" -t app1-deploy1 -f -
+echo "shared-creds/staging/global/vars:GLOBAL_DB_PASS" | kapitan refs --write "vaultkv:global/staging/database/password" -t app1-deploy1 -f -
 
-echo "shared-creds/us/global/vars:GLOBAL_DB_HOST" | kapitan refs --write "vaultkv:global/us/database/hostname" -t app1-deploy3 -f -
-echo "shared-creds/us/global/vars:GLOBAL_DB_USER" | kapitan refs --write "vaultkv:global/us/database/username" -t app1-deploy3 -f -
-echo "shared-creds/us/global/vars:GLOBAL_DB_PASS" | kapitan refs --write "vaultkv:global/us/database/password" -t app1-deploy3 -f -
+echo "shared-creds/us/global/vars:GLOBAL_DB_HOST" | kapitan refs --write "vaultkv:global/us/database/hostname" -t app1-deploy2 -f -
+echo "shared-creds/us/global/vars:GLOBAL_DB_USER" | kapitan refs --write "vaultkv:global/us/database/username" -t app1-deploy2 -f -
+echo "shared-creds/us/global/vars:GLOBAL_DB_PASS" | kapitan refs --write "vaultkv:global/us/database/password" -t app1-deploy2 -f -
 ```
 
 and you can see the secret references being used in the target configuration
 
-* [inventory/targets/app1-deploy2.yml](inventory/targets/app1-deploy2.yml)
-* [inventory/targets/app1-deploy3.yml](inventory/targets/app1-deploy3.yml)
+* [inventory/targets/app1-deploy1.yml](inventory/targets/app1-deploy1.yml)
+* [inventory/targets/app1-deploy2.yml](inventory/targets/app1-deploy3.yml)
 
 ### Reveal
 
 The generated K8s secret contains embedded references to secrets located in vault
 
+* [compiled/app1-deploy1/secret.yaml](compiled/app1-deploy1/secret.yaml)
 * [compiled/app1-deploy2/secret.yaml](compiled/app1-deploy2/secret.yaml)
-* [compiled/app1-deploy3/secret.yaml](compiled/app1-deploy3/secret.yaml)
 
 To decode locally you first need to login to vault (details may vary)
 
@@ -135,8 +131,8 @@ vault login -no-print -method=github token=XXXXXXXXXXXXXXXX
 And then run the reveal command
 
 ```
+kapitan refs --reveal -f compiled/app1-deploy1/secret.yaml
 kapitan refs --reveal -f compiled/app1-deploy2/secret.yaml
-kapitan refs --reveal -f compiled/app1-deploy3/secret.yaml
 ```
 
 Note:

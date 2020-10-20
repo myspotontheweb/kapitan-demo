@@ -9,3 +9,11 @@ parameters:
       namespace: proj1
     source:
       repoURL: git@github.com:myorg/app1.git
+      helm:
+        parameters: 
+          - name: env.LOG_LEVEL
+            value: DEBUG
+    secret:
+      DB_HOST: ?{vaultkv:global/${region}/database/hostname}
+      DB_NAME: ?{vaultkv:global/${region}/database/username}
+      DB_PASS: ?{vaultkv:global/${region}/database/password}

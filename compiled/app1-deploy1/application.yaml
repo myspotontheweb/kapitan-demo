@@ -7,14 +7,14 @@ metadata:
   namespace: argocd
 spec:
   destination:
-    namespace: project1
-    server: https://k8s-api.us.mydomain.com
+    namespace: team-025
+    server: https://k8s-api.staging.mydomain.com
   project: proj1
   source:
     helm:
       parameters:
         - name: env.LOG_LEVEL
-          value: WARN
+          value: DEBUG
     path: chart
     repoURL: git@github.com:myorg/app1.git
-    targetRevision: master
+    targetRevision: staging
