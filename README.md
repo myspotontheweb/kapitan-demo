@@ -67,7 +67,8 @@ Contains the generated the YAML output that can be synced against the K8s cluste
 
 Kapitan will render the files contained in **targets** subdirectory. 
 
-* [inventory/classes/myorg/apps/app1.yml](inventory/classes/myorg/apps/app1.yml)
+* [inventory/targets/app1-deploy1.yml](inventory/targets/app1-deploy1.yml)
+* [inventory/targets/app1-deploy2.yml](inventory/targets/app1-deploy2.yml)
 
 In these examples there are 3 different deployments of app1. 
 
@@ -109,10 +110,9 @@ echo "shared-creds/us/global/vars:GLOBAL_DB_USER" | kapitan refs --write "vaultk
 echo "shared-creds/us/global/vars:GLOBAL_DB_PASS" | kapitan refs --write "vaultkv:global/us/database/password" -t app1-deploy2 -f -
 ```
 
-and you can see the secret references being used in the target configuration
+and you can see the secret references being used in the inherited class configuration
 
-* [inventory/targets/app1-deploy1.yml](inventory/targets/app1-deploy1.yml)
-* [inventory/targets/app1-deploy2.yml](inventory/targets/app1-deploy3.yml)
+* [inventory/classes/myorg/apps/app1.yml](inventory/classes/myorg/apps/app1.yml)
 
 ### Reveal
 
