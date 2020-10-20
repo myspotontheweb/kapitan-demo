@@ -2,6 +2,7 @@ classes:
   - myorg.apps.app1
 
 parameters:
+  region: staging
   application:
     destination:
       namespace: team-025
