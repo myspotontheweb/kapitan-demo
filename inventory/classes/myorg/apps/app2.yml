@@ -1,0 +1,19 @@
+classes:
+  - application
+
+parameters:
+  region: REPLACE_ME
+  application:
+    project: proj2
+    destination:
+      namespace: proj2
+    source:
+      repoURL: git@github.com:myorg/app2.git
+      helm:
+        parameters: 
+          - name: env.LOG_LEVEL
+            value: DEBUG
+    secret:
+      DB_HOST: ?{vaultkv:global/${region}/database/hostname}
+      DB_NAME: ?{vaultkv:global/${region}/database/username}
+      DB_PASS: ?{vaultkv:global/${region}/database/password}

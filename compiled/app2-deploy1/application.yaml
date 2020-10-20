@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  name: app2-deploy1
+  namespace: argocd
+spec:
+  destination:
+    namespace: proj2
+    server: https://kubernetes.default.svc
+  project: proj2
+  source:
+    helm:
+      parameters:
+        - name: env.LOG_LEVEL
+          value: DEBUG
+    path: chart
+    repoURL: git@github.com:myorg/app2.git
+    targetRevision: master

@@ -1,0 +1,7 @@
+classes:
+  - common
+  - myorg.apps.app2
+
+parameters:
+  target_name: app2-deploy1
+  region: us
