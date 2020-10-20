@@ -25,9 +25,9 @@ Demo repo to try out [Kapitan](https://kapitan.dev/)
 │   ├── app1-deploy1
 │   │   ├── application.yaml
 │   │   └── secret.yaml
-│   ├── app1-deploy2
-│       ├── application.yaml
-│       └── secret.yaml
+│   └── app1-deploy2
+│       ├── application.yaml
+│       └── secret.yaml
 ├── components
 │   └── application
 │       └── main.jsonnet
@@ -44,19 +44,22 @@ Demo repo to try out [Kapitan](https://kapitan.dev/)
 │   │               └── app1.yml
 │   └── targets
 │       ├── app1-deploy1.yml
-│       ├── app1-deploy2.yml
+│       └── app1-deploy2.yml
 ├── Makefile
 ├── README.md
 └── refs
-    ├── global
-    │   └── staging
-    │       └── database
-    │           ├── hostname
-    │           ├── password
-    │           └── username
-    └── targets
-        └── app1-deploy1
-            └── secrets
+    └── global
+        ├── staging
+        │   └── database
+        │       ├── hostname
+        │       ├── password
+        │       └── username
+        └── us
+            └── database
+                ├── hostname
+                ├── password
+                └── username
+
 ```
 
 ## compiled directory
