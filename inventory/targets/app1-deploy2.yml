@@ -4,6 +4,7 @@ classes:
 
 parameters:
   target_name: app1-deploy2
+  region: staging
   application:
     source:
       helm:
@@ -11,7 +12,7 @@ parameters:
           - name: env.LOG_LEVEL
             value: DEBUG
     secret:
-      DB_HOST: ?{vaultkv:global/staging/database/hostname}
-      DB_NAME: ?{vaultkv:global/staging/database/username}
-      DB_PASS: ?{vaultkv:global/staging/database/password}
+      DB_HOST: ?{vaultkv:global/${region}/database/hostname}
+      DB_NAME: ?{vaultkv:global/${region}/database/username}
+      DB_PASS: ?{vaultkv:global/${region}/database/password}
 

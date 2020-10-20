@@ -108,6 +108,10 @@ Create the kapitan references to secrets in vault
 echo "shared-creds/staging/global/vars:GLOBAL_DB_HOST" | kapitan refs --write "vaultkv:global/staging/database/hostname" -t app1-deploy2 -f -
 echo "shared-creds/staging/global/vars:GLOBAL_DB_USER" | kapitan refs --write "vaultkv:global/staging/database/username" -t app1-deploy2 -f -
 echo "shared-creds/staging/global/vars:GLOBAL_DB_PASS" | kapitan refs --write "vaultkv:global/staging/database/password" -t app1-deploy2 -f -
+
+echo "shared-creds/us/global/vars:GLOBAL_DB_HOST" | kapitan refs --write "vaultkv:global/us/database/hostname" -t app1-deploy3 -f -
+echo "shared-creds/us/global/vars:GLOBAL_DB_USER" | kapitan refs --write "vaultkv:global/us/database/username" -t app1-deploy3 -f -
+echo "shared-creds/us/global/vars:GLOBAL_DB_PASS" | kapitan refs --write "vaultkv:global/us/database/password" -t app1-deploy3 -f -
 ```
 
 and you can see the secret references being used in the target configuration
@@ -119,6 +123,7 @@ and you can see the secret references being used in the target configuration
 The generated K8s secret contains embedded references to secrets located in vault
 
 * [compiled/app1-deploy2/secret.yaml](compiled/app1-deploy2/secret.yaml)
+* [compiled/app1-deploy3/secret.yaml](compiled/app1-deploy3/secret.yaml)
 
 To decode locally you first need to login to vault (details may vary)
 
@@ -130,6 +135,7 @@ And then run the reveal command
 
 ```
 kapitan refs --reveal -f compiled/app1-deploy2/secret.yaml
+kapitan refs --reveal -f compiled/app1-deploy3/secret.yaml
 ```
 
 Note:

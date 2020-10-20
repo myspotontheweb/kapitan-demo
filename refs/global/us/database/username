@@ -1,0 +1,8 @@
+data: c2hhcmVkLWNyZWRzL3VzL2dsb2JhbC92YXJzOkdMT0JBTF9EQl9VU0VSCg==
+encoding: original
+type: vaultkv
+vault_params:
+  VAULT_ADDR: https://vault.us.teamworkops.com
+  VAULT_SKIP_VERIFY: true
+  auth: token
+  engine: kv-v2

@@ -4,9 +4,15 @@ classes:
 
 parameters:
   target_name: app1-deploy3
+  region: us
   application:
     source:
       helm:
         parameters: 
           - name: env.LOG_LEVEL
-            value: ERROR
+            value: DEBUG
+    secret:
+      DB_HOST: ?{vaultkv:global/${region}/database/hostname}
+      DB_NAME: ?{vaultkv:global/${region}/database/username}
+      DB_PASS: ?{vaultkv:global/${region}/database/password}
+
