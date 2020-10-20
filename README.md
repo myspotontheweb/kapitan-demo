@@ -117,6 +117,7 @@ echo "shared-creds/us/global/vars:GLOBAL_DB_PASS" | kapitan refs --write "vaultk
 and you can see the secret references being used in the target configuration
 
 * [inventory/targets/app1-deploy2.yml](inventory/targets/app1-deploy2.yml)
+* [inventory/targets/app1-deploy3.yml](inventory/targets/app1-deploy3.yml)
 
 ### Reveal
 
