@@ -80,8 +80,8 @@ echo "shared-creds/us/global/vars:GLOBAL_DB_PASS" | kapitan refs --write "vaultk
 
 and you can see the secret referenced in the application classes
 
-* [inventory/classes/myorg/apps/app1.yml](inventory/classes/myorg/apps/app1.yml)
-* [inventory/classes/myorg/apps/app2.yml](inventory/classes/myorg/apps/app2.yml)
+* [inventory/classes/application/app1.yml](inventory/classes/application/app1.yml)
+* [inventory/classes/application/app2.yml](inventory/classes/application/app2.yml)
 
 ### Reveal
 
