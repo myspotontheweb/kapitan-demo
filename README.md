@@ -81,6 +81,40 @@ parameters:
   target_name: app1-deploy1
 ```
 
+## YAML generation
+
+The following files are being used to generate the compiled YAML
+
+```
+├── components
+│   └── application
+│       └── main.jsonnet
+├── inventory
+│   ├── classes
+│   │   ├── application.yml
+```
+
+The application class inherited by all application and contains the intructions on how to generate YAML
+
+* [inventory/classes/application.yml](inventory/classes/application.yml)
+
+Specifically it contains this configuration:
+
+```
+  kapitan:
+    compile:
+      - output_path: .
+        input_type: jsonnet
+        output_type: yaml
+        input_paths:
+          - components/application/main.jsonnet
+```
+
+Which instructs Kapitan to use a Jsonnet script to generate YAML
+
+* [components/application/main.jsonnet](components/application/main.jsonnet)
+
+Kapitan also supports other mechanism for generating YAML Jsonnet is convenient and ensures the YAML files are well formatted.
 
 # Secrets 
 
