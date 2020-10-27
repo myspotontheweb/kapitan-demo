@@ -25,21 +25,21 @@ Demo repo to try out [Kapitan](https://kapitan.dev/)
 │   ├── app1-deploy1
 │   │   ├── application.yaml
 │   │   └── secret.yaml
-│   ├── ..
+│   └── app2-deploy1
+│       ├── application.yaml
+│       └── secret.yaml
 │
 ├── components
 │   └── ..
 │
 ├── inventory
 │   ├── classes
-│   │   ├── application
-│   │   │   ├── app1.yml
-│   │   │   └── ..
 │   │   ├── ..
-│   │
+|   |
 │   └── targets
 │       ├── app1-deploy1.yml
-│       ├── ..
+│       ├── app2-deploy1.yml
+│       └── ..
 │
 └── refs
     └── ..
@@ -54,6 +54,38 @@ and generates outputs in the following directory
 * [compiled](compiled)
 
 These files can then be synced with the target cluster using a tool like ArgoCD
+
+## Application modelling
+
+The inventory directory contains a set of files for modelling each target deployment
+
+```
+│   ├── classes
+│   │   ├── application
+│   │   │   ├── app1.yml
+│   │   │   └── app2.yml
+│   │   ├── project
+│   │   │   ├── proj1.yml
+│   │   │   └── proj2.yml
+│   │   └── region
+│   │       ├── eu.yml
+│   │       ├── staging.yml
+│   │       └── us.yml
+```
+
+For example, "app1" is deployed to the namespace operated by the "proj1" team and deployed using the staging branch and staging secrets.
+These detail deploy details are abstracted using classes.
+
+```
+classes:
+  - common
+  - application.app1
+  - project.proj1
+  - region.staging
+
+parameters:
+  target_name: app1-deploy1
+```
 
 
 # Secrets 
