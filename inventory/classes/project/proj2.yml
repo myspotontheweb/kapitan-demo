@@ -1,0 +1,5 @@
+parameters:
+  application:
+    project: proj2
+    destination:
+      namespace: proj2
