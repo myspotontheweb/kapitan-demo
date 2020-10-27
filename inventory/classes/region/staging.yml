@@ -1,0 +1,6 @@
+parameters:
+  region: staging
+  application:
+    source:
+      targetRevision: staging
+
