@@ -55,6 +55,7 @@ These files can then be synced with the target cluster using a tool like ArgoCD
 The inventory directory contains a set of files for modelling each target deployment
 
 ```
+├── inventory
 │   ├── classes
 │   │   ├── application
 │   │   │   ├── app1.yml
