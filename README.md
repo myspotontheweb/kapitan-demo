@@ -71,7 +71,7 @@ The inventory directory contains a set of files for modelling each target deploy
 ```
 
 For example, "app1" is deployed to the namespace operated by the "proj1" team and deployed using the staging branch and staging secrets.
-These detail deploy details are abstracted using classes.
+These deploy details are abstracted using classes.
 
 ```
 classes:
