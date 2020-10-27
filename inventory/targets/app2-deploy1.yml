@@ -1,6 +1,7 @@
 classes:
   - common
   - application.app2
+  - project.proj2
   - region.us
 
 parameters:

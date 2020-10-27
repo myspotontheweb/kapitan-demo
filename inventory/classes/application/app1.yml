@@ -3,9 +3,6 @@ classes:
 
 parameters:
   application:
-    project: proj1
-    destination:
-      namespace: proj1
     source:
       repoURL: git@github.com:myorg/app1.git
       helm:

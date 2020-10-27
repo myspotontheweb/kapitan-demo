@@ -1,6 +1,7 @@
 classes:
   - common
   - application.app1
+  - project.proj1
   - region.staging
 
 parameters:
