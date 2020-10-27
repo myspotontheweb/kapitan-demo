@@ -10,7 +10,8 @@ Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
 
 # kapitan-demo
 
-Demo repo to try out [Kapitan](https://kapitan.dev/)
+This is a demo to explore using [Kapitan](https://kapitan.dev/) to generate the content of a gitops repository that manages a set of 
+applications deployed using [ArgoCD](https://argoproj.github.io/argo-cd/).
 
 # Project Structure
 
