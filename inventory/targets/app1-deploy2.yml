@@ -1,7 +1,7 @@
 classes:
   - common
   - application.app1
+  - region.us
 
 parameters:
   target_name: app1-deploy2
-  region: us

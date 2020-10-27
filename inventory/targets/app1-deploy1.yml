@@ -1,10 +1,7 @@
 classes:
   - common
   - application.app1
+  - region.staging
 
 parameters:
   target_name: app1-deploy1
-  region: staging
-  application:
-    source:
-      targetRevision: staging
