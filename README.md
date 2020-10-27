@@ -5,9 +5,6 @@ Table of Contents
    * [kapitan-demo](#kapitan-demo)
    * [Project Structure](#project-structure)
    * [Secrets](#secrets)
-      * [Vault](#vault)
-         * [Setup](#setup)
-         * [Reveal](#reveal)
 
 Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
 
