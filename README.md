@@ -162,6 +162,8 @@ vault login -no-print -method=github token=XXXXXXXXXXXXXXXX
 And then run the reveal command
 
 ```
+export VAULT_CAPATH=/etc/ssl/certs
+
 kapitan refs --reveal -f compiled/app1-deploy1/secret.yaml
 kapitan refs --reveal -f compiled/app1-deploy2/secret.yaml
 kapitan refs --reveal -f compiled/app2-deploy1/secret.yaml
