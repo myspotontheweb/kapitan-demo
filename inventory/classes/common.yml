@@ -9,3 +9,4 @@ parameters:
         engine: kv-v2
         VAULT_ADDR: https://vault.us.teamworkops.com
         VAULT_SKIP_VERIFY: false
+        VAULT_CAPATH: /etc/ssl/certs
